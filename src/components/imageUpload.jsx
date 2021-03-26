@@ -26,8 +26,11 @@ const ImageUpload = () => {
     const files = e.dataTransfer.files;
 
     [...files].forEach(uploadFile);
+  };
 
-    // uploadFile(file);
+  const handleInputClick = (e) => {
+    const file = e.target.files[0];
+    uploadFile(file);
   };
 
   const uploadFile = (file) => {
@@ -60,7 +63,7 @@ const ImageUpload = () => {
       </div>
       <form>
         <label htmlFor="file-upload">Choose a file</label>
-        <input type="file" id="file-upload" />
+        <input type="file" id="file-upload" onChange={handleInputClick} />
       </form>
     </div>
   );
