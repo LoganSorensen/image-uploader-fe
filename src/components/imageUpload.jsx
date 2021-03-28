@@ -3,7 +3,7 @@ import axios from "axios";
 
 import { ReactComponent as UploadSvg } from "../assets/image.svg";
 
-const ImageUpload = () => {
+const ImageUpload = (props) => {
   const handleDragEnter = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -42,25 +42,27 @@ const ImageUpload = () => {
       .post("http://localhost:5000/images", formData)
       .then((res) => {
         console.log(res);
+        props.getImage(res.data.request.url)
       })
       .catch((err) => console.log(err));
   };
 
   return (
-    <div className="image-upload">
+    <div className="image-upload image-window">
+        <button onClick={props.setDisplay}>Test</button>
       <h2>Upload your image</h2>
       <p>File should be a jpeg, jpg, or png</p>
-      <span>or</span>
       <div
-        className="drop-area"
+        className="drop-area image-area"
         onDrop={handleDrop}
         onDragOver={handleDragOver}
         onDragEnter={handleDragEnter}
         onDragLeave={handleDragLeave}
-      >
+        >
         <UploadSvg />
         <p>Drag &amp; Drop your image here</p>
       </div>
+          <span>Or</span>
       <form>
         <label htmlFor="file-upload">Choose a file</label>
         <input type="file" id="file-upload" onChange={handleInputClick} />
