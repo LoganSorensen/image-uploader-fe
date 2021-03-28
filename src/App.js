@@ -5,27 +5,24 @@ import "./App.css";
 
 import ImageUpload from "./components/imageUpload";
 import UploadSuccess from "./components/uploadSuccess";
+import Loader from "./components/loader";
 
 function App() {
   const [component, setComponent] = useState("");
-  const [imageUrl, setImageUrl] = useState("")
+  const [imageUrl, setImageUrl] = useState(null);
 
   const setDisplay = () => {
     setComponent("loader");
-    console.log("loader");
     setTimeout(() => {
-      console.log("success");
       setComponent("success");
     }, 3000);
   };
 
   const getImage = (url) => {
-    console.log('getImage url:', url)
     axios
       .get(url)
       .then((res) => {
-        console.log(res);
-        setImageUrl(`http://localhost:5000/${res.data.image.image}`)
+        setImageUrl(`http://localhost:5000/${res.data.image.image}`);
       })
       .catch((err) => console.log(err));
   };
@@ -34,6 +31,8 @@ function App() {
     <div className="App">
       {component === "success" ? (
         <UploadSuccess imageUrl={imageUrl} />
+      ) : component === "loader" ? (
+        <Loader />
       ) : (
         <ImageUpload setDisplay={setDisplay} getImage={getImage} />
       )}

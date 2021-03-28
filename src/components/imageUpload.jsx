@@ -41,15 +41,14 @@ const ImageUpload = (props) => {
     axios
       .post("http://localhost:5000/images", formData)
       .then((res) => {
-        console.log(res);
-        props.getImage(res.data.request.url)
+        props.getImage(res.data.request.url);
+        props.setDisplay();
       })
       .catch((err) => console.log(err));
   };
 
   return (
     <div className="image-upload image-window">
-        <button onClick={props.setDisplay}>Test</button>
       <h2>Upload your image</h2>
       <p>File should be a jpeg, jpg, or png</p>
       <div
@@ -58,11 +57,11 @@ const ImageUpload = (props) => {
         onDragOver={handleDragOver}
         onDragEnter={handleDragEnter}
         onDragLeave={handleDragLeave}
-        >
+      >
         <UploadSvg />
         <p>Drag &amp; Drop your image here</p>
       </div>
-          <span>Or</span>
+      <span>Or</span>
       <form>
         <label htmlFor="file-upload">Choose a file</label>
         <input type="file" id="file-upload" onChange={handleInputClick} />
