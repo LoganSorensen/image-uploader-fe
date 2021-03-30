@@ -14,7 +14,7 @@ const Loader = () => {
     return () => {
       window.clearInterval(counter);
     };
-  }, []);
+  });
 
   return (
     <div className="loader">

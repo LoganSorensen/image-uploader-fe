@@ -39,7 +39,7 @@ const ImageUpload = (props) => {
     formData.append("image", file);
 
     axios
-      .post("http://localhost:5000/images", formData)
+      .post("https://lsorensen-image-uploader.herokuapp.com/images", formData)
       .then((res) => {
         props.getImage(res.data.request.url);
         props.setDisplay();

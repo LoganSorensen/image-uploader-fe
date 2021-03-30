@@ -22,7 +22,9 @@ function App() {
     axios
       .get(url)
       .then((res) => {
-        setImageUrl(`http://localhost:5000/${res.data.image.image}`);
+        setImageUrl(
+          `https://lsorensen-image-uploader.herokuapp.com/${res.data.image.image}`
+        );
       })
       .catch((err) => console.log(err));
   };
